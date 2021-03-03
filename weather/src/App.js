@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Display from "./components/Display";
 
-// api.openweathermap.org/data/2.5/onecall?lat=42.9849&lon=81.2453&units=metric&appid=4b861c89a18155e0e8d3c5587cdcad71
+const londonURL =
+    "https://api.openweathermap.org/data/2.5/onecall?lat=42.9849&lon=-81.2453&units=metric&appid=4b861c89a18155e0e8d3c5587cdcad71";
 
 // api.openweathermap.org/data/2.5/forecast?id=524901&appid=4b861c89a18155e0e8d3c5587cdcad71
 
@@ -10,18 +12,36 @@ import React, { useEffect, useState } from "react";
 
 function App() {
     const [weatherData, setWeatherData] = useState();
-
+    const [loading, setLoading] = useState(true);
+    const fetchData = async url => {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            setLoading(false);
+            console.log(data);
+            setWeatherData(data);
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+        }
+    };
     useEffect(() => {
-        fetch(
-            "https://api.openweathermap.org/data/2.5/onecall?lat=42.9849&lon=81.2453&units=metric&appid=4b861c89a18155e0e8d3c5587cdcad71"
-        )
-            .then(response => response.json())
-            .then(data => setWeatherData(data));
+        fetchData(londonURL);
     }, []);
+
+    console.log(weatherData);
 
     return (
         <div className="App">
-            <div>Temp: {weatherData.current.temp}</div>
+            {loading ? (
+                <h1>Loading...</h1>
+            ) : !weatherData ? (
+                <h1>No data</h1>
+            ) : (
+                <>
+                    <Display weatherData={weatherData} />
+                </>
+            )}
         </div>
     );
 }
