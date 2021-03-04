@@ -4,7 +4,7 @@ import Image from "./Image";
 const Display = ({ weatherData }) => {
     const { temp, feels_like, weather } = weatherData.current;
     return (
-        <div>
+        <div className="bg-white">
             <h1>Today's weather</h1>
             <p>Temperature: {temp}</p>
             <p>Feels like: {feels_like}</p>

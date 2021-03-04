@@ -29,10 +29,10 @@ function App() {
         fetchData(londonURL);
     }, []);
 
-    console.log(weatherData);
+    // console.log(weatherData);
 
     return (
-        <div className="App">
+        <div className="bg-gray-300 h-screen">
             {loading ? (
                 <h1>Loading...</h1>
             ) : !weatherData ? (

@@ -1,26 +1,34 @@
 import React from "react";
+import {
+    WiCloudy,
+    WiDaySunny,
+    WiFog,
+    WiRain,
+    WiShowers,
+    WiSnow,
+    WiThunderstorm,
+} from "react-icons/wi";
 
 const Image = ({ id }) => {
     return (
-        <div>
+        <div style={{ fontSize: "300px" }}>
             {id > 199 && id < 299 ? (
-                <p>Thunderstorm</p>
+                <WiThunderstorm />
             ) : id > 299 && id < 399 ? (
-                <p>Drizzle</p>
+                <WiRain />
             ) : id > 499 && id < 599 ? (
-                <p>Rain</p>
+                <WiShowers />
             ) : id > 599 && id < 699 ? (
-                <p>Snow</p>
+                <WiSnow />
             ) : id > 699 && id < 799 ? (
-                <p>Atmosphere</p>
+                <WiFog />
             ) : id === 800 ? (
-                <p>Clear</p>
+                <WiDaySunny />
             ) : id > 800 && id < 899 ? (
-                <p>Cloudy</p>
+                <WiCloudy />
             ) : (
                 <p>I dunno</p>
             )}
-            <p>Image id: {id}</p>
         </div>
     );
 };
