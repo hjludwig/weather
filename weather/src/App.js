@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Display from "./components/Display";
+import UserInputs from "./components/UserInputs";
 
 const londonURL =
     "https://api.openweathermap.org/data/2.5/onecall?lat=42.9849&lon=-81.2453&units=metric&appid=4b861c89a18155e0e8d3c5587cdcad71";
@@ -13,7 +14,17 @@ const londonURL =
 function App() {
     const [weatherData, setWeatherData] = useState();
     const [loading, setLoading] = useState(true);
+    const defaultCity = {
+        name: "London",
+        lat: "42.9849",
+        lon: "-81.2453",
+    };
+    const [city, setCity] = useState({ ...defaultCity });
+    const constructURL = city => {
+        alert(`${city.name}: ${city.lat} ${city.lon}`);
+    };
     const fetchData = async url => {
+        constructURL();
         try {
             const response = await fetch(url);
             const data = await response.json();
@@ -32,16 +43,17 @@ function App() {
     // console.log(weatherData);
 
     return (
-        <div className="bg-gray-300 h-screen">
+        <div className="bg-gray-300 h-screen p-5">
             {loading ? (
                 <h1>Loading...</h1>
             ) : !weatherData ? (
                 <h1>No data</h1>
             ) : (
                 <>
-                    <Display weatherData={weatherData} />
+                    <Display weatherData={weatherData} city={city} />
                 </>
             )}
+            <UserInputs setCity={setCity} fetchData={fetchData} />
         </div>
     );
 }
