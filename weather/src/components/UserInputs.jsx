@@ -22,7 +22,7 @@ const UserInputs = ({ setCity, fetchData }) => {
         fetchData(city);
     };
     return (
-        <div className="bg-white my-5 rounded-lg p-10">
+        <div className="bg-white my-5 rounded-lg p-10 shadow-xl">
             <h1>Choose city</h1>
             <button
                 className="btn-blue"
