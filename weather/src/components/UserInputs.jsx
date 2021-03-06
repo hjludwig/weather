@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Button from "./Button";
 
-const UserInputs = ({ setCity }) => {
-    const [count, setCount] = useState(0);
+const UserInputs = ({ setCity, fetchData }) => {
     const london = {
         name: "London",
         lat: "42.9849",
@@ -10,19 +8,19 @@ const UserInputs = ({ setCity }) => {
     };
     const hamilton = {
         name: "Hamilton",
-        lat: "40",
-        lon: "-60",
+        lat: "43.255",
+        lon: "-79.8438",
     };
     const dawson = {
         name: "Dawson City",
-        lat: "40",
-        lon: "-60",
+        lat: "64.0600",
+        lon: "-139.4320",
     };
 
     const handleClick = city => {
         setCity(city);
+        fetchData(city);
     };
-    const message = "Hello there";
     return (
         <div className="bg-white my-5 rounded-lg p-10">
             <h1>Choose city</h1>

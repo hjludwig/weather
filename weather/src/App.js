@@ -21,15 +21,14 @@ function App() {
     };
     const [city, setCity] = useState({ ...defaultCity });
     const constructURL = city => {
-        alert(`${city.name}: ${city.lat} ${city.lon}`);
+        return `https://api.openweathermap.org/data/2.5/onecall?lat=${city.lat}&lon=${city.lon}&units=metric&appid=4b861c89a18155e0e8d3c5587cdcad71`;
     };
-    const fetchData = async url => {
-        constructURL();
+    const fetchData = async city => {
+        const url = constructURL(city);
         try {
             const response = await fetch(url);
             const data = await response.json();
             setLoading(false);
-            console.log(data);
             setWeatherData(data);
         } catch (error) {
             setLoading(false);
@@ -37,10 +36,8 @@ function App() {
         }
     };
     useEffect(() => {
-        fetchData(londonURL);
+        fetchData(defaultCity);
     }, []);
-
-    // console.log(weatherData);
 
     return (
         <div className="bg-gray-300 h-screen p-5">
